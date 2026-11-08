@@ -1,0 +1,16 @@
+{
+  "key": "Product ID",
+  "delimiter": ";",
+  "columns": {
+    "title": "Product name",
+    "manufacturerName": "Maker",
+    "manufacturerAddress": "Maker address",
+    "manufacturerEmail": "Maker email",
+    "manufacturerInEu": "Maker established in EU",
+    "responsibleText": "EU rep",
+    "image": "Picture",
+    "type": "Model",
+    "gtin": "EAN",
+    "safety": "Safety notes"
+  }
+}

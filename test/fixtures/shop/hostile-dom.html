@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hostile DOM</title>
+<script>
+  // Tamper with built-ins a collector in the page's own world would use.
+  var big = 'x'.repeat(5e6);
+  Array.from = function () { throw new Error('tampered'); };
+  String.prototype.slice = function () { return big; };
+  String.prototype.trim = function () { return big; };
+  window.getComputedStyle = function () { throw new Error('tampered'); };
+  JSON.stringify = function () { return big; };
+  Object.defineProperty(Element.prototype, 'textContent', { get: function () { return big; } });
+</script>
+</head>
+<body><main>
+<h1>Hostile DOM</h1>
+<p>Manufacturer: Honest Maker GmbH, Hauptstraße 5, 10115 Berlin, Germany, info@honest.example</p>
+<button>Add to cart</button>
+</main></body></html>

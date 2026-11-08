@@ -1,0 +1,2 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Price,Variant Barcode,Image Src,Image Position,Image Alt Text,Status
+canvas-tote,Canvas tote,"<p>Strong tote bag.</p><p><strong>Manufacturer:</strong> Totewerk GmbH, Lindenallee 3, 50668 Köln, Deutschland, kontakt@totewerk.example</p>",Totewerk,Bags,,TRUE,Title,Default Title,TOTE-1,19.00,4006381333931,https://cdn.example/tote.jpg,1,Tote,active

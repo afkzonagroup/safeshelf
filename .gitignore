@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+safeshelf-report/
+*.log
+.DS_Store
+/tmp/
+test-results/

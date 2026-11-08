@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Cordless Kettle 1.7 l KT-90 – MegaStore</title>
+<meta property="og:type" content="product">
+<style>.pdp-image{width:520px;height:520px}.mega [hidden]{display:none}</style>
+</head><body>
+<header class="site-header"><nav class="mega" id="mega" aria-label="Departments"></nav></header>
+<main id="pdp">
+ <img class="pdp-image" src="/img/kt90.png" alt="Kettle KT-90" width="520" height="520">
+ <h1>Cordless Kettle 1.7 l KT-90</h1>
+ <p class="price">€39.99</p>
+ <button type="submit" class="add-to-cart">Add to basket</button>
+ <table class="specs"><tr><th>Model</th><td>KT-90</td></tr><tr><th>EAN</th><td>5050123456784</td></tr></table>
+ <h2>Manufacturer</h2>
+ <p>Hearth Appliances Ltd<br>Unit 4, Mill Road<br>Galway H91 E2K3<br>Ireland<br>care@hearth.example</p>
+ <h2>Safety information</h2>
+ <p>Use only with the supplied base. Do not fill above the MAX mark.</p>
+</main>
+<section class="reviews" id="reviews"><h2>Customer reviews</h2></section>
+<footer class="site-footer"><p>MegaStore Ltd · Terms · Privacy</p></footer>
+<script>
+  // A department-store mega menu: thousands of links before the product content.
+  var items = [];
+  for (var i = 0; i < 6000; i++) items.push('<li><a href="/c/' + i + '" aria-controls="sub' + i + '">Department ' + i + '</a><div id="sub' + i + '" hidden><a href="/c/' + i + '/all">All</a></div></li>');
+  document.getElementById('mega').innerHTML = '<ul>' + items.join('') + '</ul>';
+  var reviews = [];
+  for (var j = 0; j < 500; j++) reviews.push('<article class="review"><b>Customer ' + j + '</b><p>Boils fast, quiet.</p></article>');
+  document.getElementById('reviews').insertAdjacentHTML('beforeend', reviews.join(''));
+</script>
+</body></html>

@@ -1,0 +1,88 @@
+{
+  "name": "@afkzona/safeshelf",
+  "version": "0.1.0",
+  "description": "Checks online product offers and product feeds for the information the EU General Product Safety Regulation (EU) 2023/988, Article 19, requires in distance sales.",
+  "license": "AGPL-3.0-only",
+  "author": "MB AFKzona Group",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afkzonagroup/safeshelf.git"
+  },
+  "homepage": "https://github.com/afkzonagroup/safeshelf#readme",
+  "bugs": {
+    "url": "https://github.com/afkzonagroup/safeshelf/issues"
+  },
+  "keywords": [
+    "gpsr",
+    "general-product-safety-regulation",
+    "product-safety",
+    "ecommerce",
+    "product-feed",
+    "woocommerce",
+    "shopify",
+    "google-merchant",
+    "scanner",
+    "playwright"
+  ],
+  "bin": {
+    "safeshelf": "dist/cli/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./playwright": {
+      "types": "./dist/playwright/index.d.ts",
+      "import": "./dist/playwright/index.js"
+    },
+    "./report.schema.json": "./schema/report.schema.json",
+    "./mapping.schema.json": "./schema/mapping.schema.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "LICENSE",
+    "LICENSE-ADDITIONAL-TERMS.md",
+    "README.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "TRADEMARKS.md",
+    "COMMERCIAL.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "check": "npm run typecheck && npm run lint && npm run test"
+  },
+  "dependencies": {
+    "playwright-core": "1.64.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "@vitest/coverage-v8": "5.0.5",
+    "eslint": "10.13.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.0",
+    "vitest": "5.0.5"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.64.1 <2"
+  },
+  "peerDependenciesMeta": {
+    "@playwright/test": {
+      "optional": true
+    }
+  }
+}

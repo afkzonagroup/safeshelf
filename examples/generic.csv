@@ -1,0 +1,3 @@
+Product ID;Product name;Maker;Maker address;Maker email;Maker established in EU;EU rep;Picture;Model;EAN;Safety notes
+G-1;Bike helmet;SafeRide Oy;Mannerheimintie 10, 00100 Helsinki, Finland;info@saferide.example;yes;;https://shop.example/helmet.jpg;SR-H1;4006381333931;Replace after a crash.
+G-2;Kids scooter;Zoomy Inc.;500 Market Street, San Francisco, CA 94105, USA;help@zoomy.example;no;;https://shop.example/scooter.jpg;ZS-2;;

@@ -1,0 +1,755 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/afkzonagroup/safeshelf/schema/report.schema.json",
+  "title": "Safeshelf report",
+  "description": "Report format 1.x. Statuses describe whether Safeshelf found the information GPSR Art. 19 lists; they are not legal conclusions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "tool",
+    "kind",
+    "startedAt",
+    "finishedAt",
+    "input",
+    "options",
+    "products",
+    "pages",
+    "summary",
+    "provisions",
+    "blockedRequests",
+    "notes",
+    "disclaimer"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$"
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "const": "safeshelf"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "kind": {
+      "enum": [
+        "scan",
+        "feed"
+      ]
+    },
+    "startedAt": {
+      "type": "string"
+    },
+    "finishedAt": {
+      "type": "string"
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "startUrl": {
+          "type": "string"
+        },
+        "urlCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "file": {
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "shopify",
+            "woocommerce",
+            "google-xml",
+            "google-tsv",
+            "generic"
+          ]
+        },
+        "columns": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "url": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "manufacturerName": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "manufacturerAddress": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "manufacturerEmail": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "manufacturerText": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "manufacturerCountry": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "manufacturerInEu": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "responsibleName": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "responsibleAddress": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "responsibleEmail": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "responsibleText": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brand": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "seller": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "image": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "type": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "gtin": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mpn": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "sku": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "identifier": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "safety": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "labelled": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context",
+        "manufacturerInEu",
+        "safetyLanguages",
+        "requireSafetyInformation"
+      ],
+      "properties": {
+        "context": {
+          "enum": [
+            "shop",
+            "marketplace"
+          ]
+        },
+        "manufacturerInEu": {
+          "enum": [
+            "yes",
+            "no",
+            "auto"
+          ]
+        },
+        "safetyLanguages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requireSafetyInformation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/product"
+      }
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/page"
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "products",
+        "productsWithMissing",
+        "productsWithReview",
+        "byElement"
+      ],
+      "properties": {
+        "products": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "productsWithMissing": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "productsWithReview": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "byElement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "manufacturer-name",
+            "manufacturer-postal-address",
+            "manufacturer-electronic-address",
+            "responsible-person-name",
+            "responsible-person-postal-address",
+            "responsible-person-electronic-address",
+            "product-picture",
+            "product-type",
+            "product-identifier",
+            "safety-information"
+          ],
+          "properties": {
+            "manufacturer-name": {
+              "$ref": "#/$defs/counts"
+            },
+            "manufacturer-postal-address": {
+              "$ref": "#/$defs/counts"
+            },
+            "manufacturer-electronic-address": {
+              "$ref": "#/$defs/counts"
+            },
+            "responsible-person-name": {
+              "$ref": "#/$defs/counts"
+            },
+            "responsible-person-postal-address": {
+              "$ref": "#/$defs/counts"
+            },
+            "responsible-person-electronic-address": {
+              "$ref": "#/$defs/counts"
+            },
+            "product-picture": {
+              "$ref": "#/$defs/counts"
+            },
+            "product-type": {
+              "$ref": "#/$defs/counts"
+            },
+            "product-identifier": {
+              "$ref": "#/$defs/counts"
+            },
+            "safety-information": {
+              "$ref": "#/$defs/counts"
+            }
+          }
+        }
+      }
+    },
+    "provisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "citation",
+          "url",
+          "quote",
+          "use"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "citation": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^https://eur-lex\\.europa\\.eu/"
+          },
+          "quote": {
+            "type": "string"
+          },
+          "use": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "blockedRequests": {
+      "type": "array",
+      "maxItems": 400,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "reason",
+          "stage"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "stage": {
+            "enum": [
+              "route",
+              "proxy"
+            ]
+          }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxPages",
+        "maxProducts",
+        "maxDurationMs",
+        "navigationTimeoutMs",
+        "maxResponseBytes",
+        "maxTotalBytes",
+        "maxRedirects",
+        "respectRobotsTxt"
+      ],
+      "properties": {
+        "maxPages": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxProducts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxDurationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "navigationTimeoutMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxResponseBytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxTotalBytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxRedirects": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "respectRobotsTxt": {
+          "type": "boolean"
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "disclaimer": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "text",
+        "selector",
+        "field",
+        "visibility"
+      ],
+      "properties": {
+        "source": {
+          "enum": [
+            "json-ld",
+            "microdata",
+            "meta",
+            "text",
+            "image",
+            "link",
+            "feed"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "selector": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "visibility": {
+          "enum": [
+            "visible",
+            "collapsed",
+            "hidden",
+            "n/a"
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "labelLanguage": {
+          "type": "string"
+        },
+        "labelSource": {
+          "enum": [
+            "official-text",
+            "original",
+            "translation"
+          ]
+        },
+        "screenshot": {
+          "type": "string",
+          "pattern": "^screenshots/E\\d{4,6}\\.jpg$"
+        }
+      }
+    },
+    "element": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "element",
+        "status",
+        "confidence",
+        "explanation",
+        "evidence"
+      ],
+      "properties": {
+        "element": {
+          "enum": [
+            "manufacturer-name",
+            "manufacturer-postal-address",
+            "manufacturer-electronic-address",
+            "responsible-person-name",
+            "responsible-person-postal-address",
+            "responsible-person-electronic-address",
+            "product-picture",
+            "product-type",
+            "product-identifier",
+            "safety-information"
+          ]
+        },
+        "status": {
+          "enum": [
+            "found",
+            "found-not-visible",
+            "not-found",
+            "not-applicable",
+            "review"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source",
+        "name",
+        "elements",
+        "missing",
+        "review",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^P\\d{4,}$"
+        },
+        "source": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "url"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "page"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "key",
+                "keyColumn",
+                "position"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "feed"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "keyColumn": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "elements": {
+          "type": "array",
+          "minItems": 10,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/element"
+          }
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "manufacturer-name",
+              "manufacturer-postal-address",
+              "manufacturer-electronic-address",
+              "responsible-person-name",
+              "responsible-person-postal-address",
+              "responsible-person-electronic-address",
+              "product-picture",
+              "product-type",
+              "product-identifier",
+              "safety-information"
+            ]
+          }
+        },
+        "review": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "manufacturer-name",
+              "manufacturer-postal-address",
+              "manufacturer-electronic-address",
+              "responsible-person-name",
+              "responsible-person-postal-address",
+              "responsible-person-electronic-address",
+              "product-picture",
+              "product-type",
+              "product-identifier",
+              "safety-information"
+            ]
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "status"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "product",
+            "not-product",
+            "skipped-robots",
+            "not-html",
+            "error"
+          ]
+        },
+        "httpStatus": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "error": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "found",
+        "found-not-visible",
+        "not-found",
+        "not-applicable",
+        "review"
+      ],
+      "properties": {
+        "found": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "found-not-visible": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "not-found": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "not-applicable": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "review": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

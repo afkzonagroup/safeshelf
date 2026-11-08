@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>SSRF vectors</title>
+<link rel="stylesheet" href="http://internal.test:{{SECRET_PORT}}/css">
+<link rel="prefetch" href="http://[::1]:{{SECRET_PORT}}/prefetch">
+<link rel="preconnect" href="http://[::1]:{{SECRET_PORT}}">
+<script type="speculationrules">{"prerender":[{"source":"list","urls":["http://[::1]:{{SECRET_PORT}}/prerender"]}]}</script>
+</head>
+<body><p>Every request below targets an internal address and must be refused.</p>
+<iframe src="http://[0:0:0:0:0:0:0:1]:{{SECRET_PORT}}/iframe"></iframe>
+<iframe src="/redirect-internal"></iframe>
+<iframe srcdoc="<script>fetch('http://[::1]:{{SECRET_PORT}}/srcdoc').catch(function(){})</script>"></iframe>
+<img src="http://[::ffff:7f00:1]:{{SECRET_PORT}}/img-mapped">
+<img src="http://[64:ff9b::7f00:1]:{{SECRET_PORT}}/img-nat64">
+<img src="http://169.254.169.254/latest/meta-data/">
+<form id="f" method="post" action="http://[::1]:{{SECRET_PORT}}/form" target="sink"><input name="a" value="b"></form>
+<iframe name="sink"></iframe>
+<script>
+  var S = 'http://[::1]:{{SECRET_PORT}}';
+  var quiet = function () {};
+  fetch(S + '/fetch', { mode: 'no-cors' }).catch(quiet);
+  fetch('/redirect-internal', { mode: 'no-cors' }).catch(quiet);
+  try { navigator.sendBeacon(S + '/beacon', 'x'); } catch (e) {}
+  try { new EventSource(S + '/sse'); } catch (e) {}
+  try { new WebSocket('ws://[::1]:{{SECRET_PORT}}/ws'); } catch (e) {}
+  try { new Worker(URL.createObjectURL(new Blob(["fetch('" + S + "/worker').catch(function(){})"], { type: 'text/javascript' }))); } catch (e) {}
+  try { new SharedWorker(URL.createObjectURL(new Blob(["fetch('" + S + "/shared-worker').catch(function(){})"], { type: 'text/javascript' }))); } catch (e) {}
+  try { navigator.serviceWorker.register('/sw.js').catch(quiet); } catch (e) {}
+  try { window.open(S + '/popup', '_blank', 'noopener'); } catch (e) {}
+  try {
+    var pc = new RTCPeerConnection({ iceServers: [{ urls: 'turn:[::1]:{{SECRET_PORT}}?transport=tcp', username: 'u', credential: 'c' }, { urls: 'stun:[::1]:{{SECRET_PORT}}' }] });
+    pc.createDataChannel('x');
+    pc.createOffer().then(function (o) { return pc.setLocalDescription(o); }).catch(quiet);
+  } catch (e) {}
+  document.getElementById('f').submit();
+</script>
+</body></html>

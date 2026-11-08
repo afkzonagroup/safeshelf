@@ -1,0 +1,13 @@
+ID,Type,SKU,"GTIN, UPC, EAN, or ISBN",Name,Published,"Is featured?","Visibility in catalog","Short description",Description,"Regular price",Categories,Images,Parent,"Attribute 1 name","Attribute 1 value(s)","Attribute 1 visible","Attribute 1 global","Attribute 2 name","Attribute 2 value(s)","Attribute 2 visible","Attribute 2 global","Meta: gpsr_manufacturer","Meta: gpsr_responsible_person","Meta: gpsr_warnings"
+101,simple,KET-200,4006381333931,"Electric kettle K-200",1,0,visible,"1.7 litre kettle","<p>Stainless steel kettle.</p><h3>Warnings</h3><p>Do not immerse in water. Keep out of reach of children.</p>",39.90,Kitchen,"https://shop.example/img/k200-front.jpg, https://shop.example/img/k200-side.jpg",,Model,K-200,1,0,,,,,"ACME Haushaltsgeräte GmbH
+Hauptstraße 5, 10115 Berlin, Germany
+info@acme.example",,
+102,simple,MUG-1,,"Ceramic mug",1,0,visible,"A mug","<p>Nice mug.</p>",9.90,Kitchen,https://shop.example/img/mug.jpg,,Brand,Mugsy,1,0,,,,,,,
+103,variable,TOY-CAR,,"Toy car",1,0,visible,"Toy car","<p>Remote-controlled car.</p>",24.00,Toys,https://shop.example/img/car.jpg,,,,,,,,,,"Shenzhen Toyworks Co., Ltd.
+88 Keji Road, Nanshan District, Shenzhen 518057, China
+sales@toyworks.example",,"Warning: Not suitable for children under 36 months. Small parts."
+104,variation,TOY-CAR-RED,5901234123457,"Toy car - red",1,0,visible,,,24.00,,https://shop.example/img/car-red.jpg,id:103,Colour,Red,1,0,,,,,,,
+105,simple,LAMP-9,9780201379624,"=HYPERLINK(""http://evil.example"",""Click"")",1,0,visible,"Desk lamp","<table><tr><th>Manufacturer</th><td>Lumo Ltd, 4 Harbour Road, Kowloon, Hong Kong, hello@lumo.example</td></tr><tr><th>EU responsible person</th><td>Lumo Europe B.V., Keizersgracht 12, 1015 CS Amsterdam, Netherlands, eu@lumo.example</td></tr></table>",19.00,Lighting,https://shop.example/img/lamp.jpg,,,,,,,,,,,,
+106,simple,SOCK-3,,"Wool socks",1,0,visible,"Socks","<p>Socks.</p>",12.00,Clothing,,,Hersteller,n/a,1,0,,,,,,,
+107,simple,DRAFT-1,,"Draft product",-1,0,visible,,,1.00,,,,,,,,,,,,,,
+108,simple,PRIV-1,,"Private product",0,0,visible,,,1.00,,,,,,,,,,,,,,

@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+safeshelf-report
+.git
+.github
+test
+*.log

@@ -1,0 +1,145 @@
+name: Safeshelf
+description: Check product pages or a product feed for the information GPSR (EU) 2023/988 Art. 19 lists for distance sales (information not found, not legal conclusions).
+author: MB AFKzona Group
+branding:
+  icon: shopping-bag
+  color: blue
+inputs:
+  url:
+    description: Shop start URL to crawl (http or https). Give url, urls-file or feed.
+    required: false
+    default: ''
+  urls-file:
+    description: Path to a file in the repository with product URLs, one per line.
+    required: false
+    default: ''
+  feed:
+    description: Path to a product export in the repository (checked offline, nothing is fetched).
+    required: false
+    default: ''
+  feed-format:
+    description: Feed format: shopify, woocommerce, google-xml, google-tsv or generic.
+    required: false
+    default: ''
+  mapping:
+    description: Path to a JSON column mapping for the feed.
+    required: false
+    default: ''
+  sitemap:
+    description: Set to true to read the shop's sitemaps to find product pages.
+    required: false
+    default: 'false'
+  max-pages:
+    description: Pages to load (1 to 2000).
+    required: false
+    default: '50'
+  max-products:
+    description: Product pages to check (1 to 2000).
+    required: false
+    default: '50'
+  max-duration:
+    description: Time budget in seconds (5 to 3600).
+    required: false
+    default: '600'
+  marketplace:
+    description: Set to true when the offers are listings on an online marketplace (GPSR Art. 22(9)).
+    required: false
+    default: 'false'
+  manufacturer-in-eu:
+    description: yes, no or auto.
+    required: false
+    default: auto
+  safety-languages:
+    description: Languages accepted for warnings, comma-separated ISO 639-1 codes (for example lt,en).
+    required: false
+    default: ''
+  require-safety-info:
+    description: Set to true when the products have warnings, so missing warnings count as missing.
+    required: false
+    default: 'false'
+  out:
+    description: Output directory for report.json, report.html, missing.csv, fixes.csv and screenshots.
+    required: false
+    default: safeshelf-report
+  report:
+    description: Any of json,html,csv.
+    required: false
+    default: json,html,csv
+  fail-on:
+    description: Fail the step if any product has information "missing" or "review". none never fails.
+    required: false
+    default: none
+  allow-addresses:
+    description: Private IP addresses that may be scanned (for a service started in the job), comma-separated.
+    required: false
+    default: ''
+  ignore-robots:
+    description: Set to true to ignore robots.txt.
+    required: false
+    default: 'false'
+outputs:
+  products:
+    description: Number of products checked.
+    value: ${{ steps.check.outputs.products }}
+  products-with-missing:
+    description: Number of products with information not found or not visible.
+    value: ${{ steps.check.outputs.products-with-missing }}
+  products-with-review:
+    description: Number of products with items to review.
+    value: ${{ steps.check.outputs.products-with-review }}
+  report-dir:
+    description: Directory with the reports.
+    value: ${{ steps.check.outputs.report-dir }}
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version: '22'
+    - name: Install and build Safeshelf
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        npm ci --ignore-scripts --no-audit --no-fund
+        npm run build
+    - name: Install Chromium
+      if: inputs.feed == ''
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: npx --no-install playwright-core install --with-deps --only-shell chromium
+    - name: Allow Chromium's sandbox on GitHub-hosted Ubuntu
+      # Ubuntu 23.10 and later restrict unprivileged user namespaces through
+      # AppArmor, which Chromium's sandbox needs. Only the throwaway
+      # GitHub-hosted VM is changed; on self-hosted runners nothing is changed
+      # and the scan fails with a clear message if the sandbox cannot start.
+      if: inputs.feed == '' && runner.os == 'Linux' && runner.environment == 'github-hosted'
+      shell: bash
+      run: |
+        if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+        fi
+    - name: Check
+      id: check
+      shell: bash
+      # Inputs are passed as environment variables, never interpolated into the script.
+      env:
+        SAFESHELF_URL: ${{ inputs.url }}
+        SAFESHELF_URLS_FILE: ${{ inputs.urls-file }}
+        SAFESHELF_FEED: ${{ inputs.feed }}
+        SAFESHELF_FEED_FORMAT: ${{ inputs.feed-format }}
+        SAFESHELF_MAPPING: ${{ inputs.mapping }}
+        SAFESHELF_SITEMAP: ${{ inputs.sitemap }}
+        SAFESHELF_MAX_PAGES: ${{ inputs.max-pages }}
+        SAFESHELF_MAX_PRODUCTS: ${{ inputs.max-products }}
+        SAFESHELF_MAX_DURATION: ${{ inputs.max-duration }}
+        SAFESHELF_MARKETPLACE: ${{ inputs.marketplace }}
+        SAFESHELF_MANUFACTURER_IN_EU: ${{ inputs.manufacturer-in-eu }}
+        SAFESHELF_SAFETY_LANGUAGES: ${{ inputs.safety-languages }}
+        SAFESHELF_REQUIRE_SAFETY_INFO: ${{ inputs.require-safety-info }}
+        SAFESHELF_OUT: ${{ inputs.out }}
+        SAFESHELF_REPORT: ${{ inputs.report }}
+        SAFESHELF_FAIL_ON: ${{ inputs.fail-on }}
+        SAFESHELF_ALLOW_ADDRESSES: ${{ inputs.allow-addresses }}
+        SAFESHELF_IGNORE_ROBOTS: ${{ inputs.ignore-robots }}
+      run: node "$GITHUB_ACTION_PATH/dist/action/entrypoint.js"

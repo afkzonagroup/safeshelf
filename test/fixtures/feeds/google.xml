@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>Example shop</title>
+    <link>https://shop.example</link>
+    <description>Products</description>
+    <item>
+      <g:id>SKU-1</g:id>
+      <g:title>Baby bottle 250 ml</g:title>
+      <g:description>BPA-free bottle. Warning: Always use this product with adult supervision.</g:description>
+      <g:link>https://shop.example/p/bottle</g:link>
+      <g:image_link>https://shop.example/img/bottle.jpg</g:image_link>
+      <g:brand>Nurtura</g:brand>
+      <g:gtin>4006381333931</g:gtin>
+      <g:mpn>NB-250</g:mpn>
+      <g:product_detail>
+        <g:section_name>Product safety</g:section_name>
+        <g:attribute_name>Manufacturer</g:attribute_name>
+        <g:attribute_value>Nurtura SAS, 12 rue de la Paix, 75002 Paris, France, contact@nurtura.example</g:attribute_value>
+      </g:product_detail>
+    </item>
+    <item>
+      <g:id>SKU-2</g:id>
+      <g:title>Garden hose &amp; reel</g:title>
+      <g:description><![CDATA[<p>30 m hose.</p>]]></g:description>
+      <g:link>https://shop.example/p/hose</g:link>
+      <g:brand>HoseCo</g:brand>
+    </item>
+  </channel>
+</rss>

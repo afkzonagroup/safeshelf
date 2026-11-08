@@ -1,0 +1,6 @@
+Title,URL handle,Description,Vendor,Product category,Type,Tags,Published on online store,Status,SKU,Barcodes,Option1 name,Option1 value,Price,Product image URL,Image position,Image alt text,Manufacturer (product.metafields.custom.manufacturer),Responsible person (product.metafields.custom.eu_responsible_person),Safety warnings (product.metafields.custom.safety_warnings)
+Trail backpack 30L,trail-backpack-30,"<p>Light hiking backpack.</p>",Peakline,Luggage & Bags,Backpacks,,TRUE,active,PK-30-GRN,0012345678905,Colour,Green,89.00,https://cdn.example/files/pack-green.jpg,1,Backpack front,"Peakline Outdoor AB, Storgatan 1, 111 51 Stockholm, Sweden, support@peakline.example",,
+,trail-backpack-30,,,,,,,,PK-30-BLU,,,Blue,89.00,https://cdn.example/files/pack-blue.jpg,2,Backpack blue,,,
+Phone charger 20W,charger-20w,"<p>USB-C charger.</p>",VoltCo,Electronics,Chargers,,TRUE,active,CH-20,,Default Title,Default Title,15.00,,,,"VoltCo Electronics Ltd., Room 5, 12 Industrial Street, Kwun Tong, Hong Kong",,"Use only indoors. Do not cover while charging."
+Gift card,gift-card,,MyShop,,Gift cards,,TRUE,active,,,Default Title,Default Title,25.00,https://cdn.example/files/gift.jpg,1,,,,
+Old lamp,old-lamp,,LampCo,,Lamps,,FALSE,archived,OL-1,,Default Title,Default Title,5.00,,,,,,

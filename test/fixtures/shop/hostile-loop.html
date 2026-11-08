@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hostile loop</title></head>
+<body><h1>Busy page</h1>
+<script>
+  // Block the main thread for good shortly after load, so any in-page evaluation hangs.
+  window.addEventListener('load', function () { setTimeout(function () { for (;;) {} }, 50); });
+</script>
+</body></html>
